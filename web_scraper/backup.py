@@ -16,14 +16,13 @@ def get_citations_needed_count(URL):
 
 def get_citation_list(URL):
   citations = get_citations(URL)
-  cit_list = []
   for cit in citations:
-    cit = cit.parent.text.strip()
-    cit_list.append(cit)
-  return cit_list
+    print("*******************"*10)
+    print(cit.parent.text.strip())
 
 
 print(get_citations_needed_count(URL))
-for i in get_citation_list(URL):
-  print("**************************"*10)
-  print(i)
+print(get)
+
+#<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (August 2010)">citation needed</span></a></i>]</sup>
+
