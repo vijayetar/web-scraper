@@ -22,9 +22,31 @@ def get_citation_list(URL):
     cit_list.append(cit)
   return cit_list
 
-if __name__ == "__main__":
+# def get_citation_needed_by_section(URL):
+#   response = requests.get(URL)
+#   # print(dir(response))
+#   content = response.content
+#   soup = BeautifulSoup(content, 'html.parser')
+#   # print(soup.prettify())
+#   citations = soup.find_paernts('sup', class_ = "noprint Inline-Template Template-Fact")
+#   # citations = soup.find('sup', class_ = "noprint Inline-Template Template-Fact").parent.previous_sibling
+#   # print(citations)
+#   cit_list = []
+#   for i in citations:
+#     cit = i.text
+#     print(cit)
+#     cit_list.append(cit)
   
-  print(get_citations_needed_count(URL))
-  for i in get_citation_list(URL):
-    print("**************************"*10)
-    print(i)
+  # # for cit in citations:
+  # #   cit = cit.find('h2')
+  # #   cit_list.append(cit)
+  # return cit_list
+
+if __name__ == "__main__":
+  pass
+  
+  # print(get_citations_needed_count(URL))
+  # get_citation_needed_by_section(URL)
+  # # for i in get_citation_needed_by_section(URL):
+  # #   print("**************************"*10)
+  # #   print(i)
