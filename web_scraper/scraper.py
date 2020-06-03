@@ -22,8 +22,9 @@ def get_citation_list(URL):
     cit_list.append(cit)
   return cit_list
 
-
-print(get_citations_needed_count(URL))
-for i in get_citation_list(URL):
-  print("**************************"*10)
-  print(i)
+if __name__ == "__main__":
+  
+  print(get_citations_needed_count(URL))
+  for i in get_citation_list(URL):
+    print("**************************"*10)
+    print(i)
