@@ -20,33 +20,28 @@ def get_citation_list(URL):
   for cit in citations:
     cit = cit.parent.text.strip()
     cit_list.append(cit)
-  return cit_list
+  return set(cit_list)
 
-def get_citation_needed_by_section(URL):
-  response = requests.get(URL)
-  # print(dir(response))
-  content = response.content
-  soup = BeautifulSoup(content, 'html.parser')
-  # print(soup.prettify())
-  citations = soup.find_parents('sup', class_ = "noprint Inline-Template Template-Fact")
-  # citations = soup.find('sup', class_ = "noprint Inline-Template Template-Fact").parent.previous_sibling
-  # print(citations)
-  cit_list = []
-  for i in citations:
-    cit = i.text
-    print(cit)
-    cit_list.append(cit)
-  
-  # for cit in citations:
-  #   cit = cit.find('h2')
-  #   cit_list.append(cit)
-  return cit_list
+def get_citation_headings(URL):
+    headings = []
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, "html.parser")
+    anchors = soup.find_all("a")
+    heading_tags = ['h1','h2','h3','h4','h5','h6']
+    for anchor in anchors:
+        text = anchor.get_text()
+        if "citation needed" in text:
+            elem = anchor.parent.parent.parent
+            for ps in elem.previous_siblings:
+                if ps.name in heading_tags:
+                    headings.append(ps.text)
+                    break
+    return set(headings)
 
 if __name__ == "__main__":
-  pass
   
   print(get_citations_needed_count(URL))
-  # get_citation_needed_by_section(URL)
+  print(get_citation_headings(URL))
   for i in get_citation_list(URL):
     print("**************************"*10)
     print(i)
