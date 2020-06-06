@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 URL = "https://en.wikipedia.org/wiki/Ramayana"
 def get_citations(URL):
   response = requests.get(URL)
-  # print(dir(response))
   content = response.content
   soup = BeautifulSoup(content, 'html.parser')
   # print(soup.prettify())
@@ -20,7 +19,11 @@ def get_citation_list(URL):
   for cit in citations:
     cit = cit.parent.text.strip()
     cit_list.append(cit)
-  return set(cit_list)
+  return_string = ""
+  for p in cit_list:
+    return_string += p + "\n" +"\n"
+  print(return_string)
+  return return_string
 
 def get_citation_headings(URL):
     headings = []
@@ -36,12 +39,14 @@ def get_citation_headings(URL):
                 if ps.name in heading_tags:
                     headings.append(ps.text)
                     break
-    return set(headings)
+    return_string = ""
+    for p in headings:
+      return_string += p + "\n" +"\n"
+    print(return_string)
+    return return_string
 
 if __name__ == "__main__":
   
   print(get_citations_needed_count(URL))
-  print(get_citation_headings(URL))
-  for i in get_citation_list(URL):
-    print("**************************"*10)
-    print(i)
+  get_citation_headings(URL)
+  get_citation_list(URL)
